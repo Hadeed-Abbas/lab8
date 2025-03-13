@@ -2,6 +2,10 @@
 const { createEvent, getEvents, authenticateUser } = require('./src/events');
 const assert = require('assert');
 
+// Set a timeout for tests to complete
+const TEST_TIMEOUT = 10000; // 10 seconds
+let timeoutId;
+
 async function runTests() {
     console.log('Running tests...');
 
@@ -36,11 +40,24 @@ async function runTests() {
         console.log('✓ Test 4: Category Filtering passed');
 
         console.log('All tests passed successfully!');
+        clearTimeout(timeoutId);
+        process.exit(0);
     } catch (error) {
         console.error('Test failed:', error.message);
+        clearTimeout(timeoutId);
         process.exit(1);
     }
 }
 
+// Set timeout for tests
+timeoutId = setTimeout(() => {
+    console.error('Tests timed out after', TEST_TIMEOUT, 'ms');
+    process.exit(1);
+}, TEST_TIMEOUT);
+
 // Run tests
-runTests().catch(console.error);
+runTests().catch(error => {
+    console.error('Unhandled error in tests:', error);
+    clearTimeout(timeoutId);
+    process.exit(1);
+});

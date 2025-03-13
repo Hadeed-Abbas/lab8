@@ -20,9 +20,16 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '18'
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm install
+        
+      - name: Create data directory
+        run: mkdir -p data
+        shell: bash
 
       - name: Run tests
         run: npm test
+        env:
+          CI: true

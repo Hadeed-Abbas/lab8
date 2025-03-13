@@ -1,7 +1,7 @@
 {
   "name": "event-planner",
   "version": "1.0.0",
-  "main": "testScripts.js",
+  "main": "testScript.js",
   "scripts": {
     "test": "node testScript.js"
   },

@@ -2,21 +2,42 @@ const fs = require('fs').promises;
 const path = require('path');
 const cron = require('node-cron');
 
-const eventsFile = path.join(__dirname, '..', 'data', 'events.json');
+const dataDir = path.join(__dirname, '..', 'data');
+const eventsFile = path.join(dataDir, 'events.json');
 
 cron.schedule('* * * * *', () => checkReminders());
 
+async function ensureDataDirExists() {
+    try {
+        await fs.access(dataDir);
+    } catch (error) {
+        // Directory doesn't exist, create it
+        await fs.mkdir(dataDir, { recursive: true });
+    }
+}
+
 async function loadEvents() {
     try {
+        await ensureDataDirExists();
         const data = await fs.readFile(eventsFile, 'utf8');
         return JSON.parse(data);
     } catch (error) {
+        if (error.code === 'ENOENT') {
+            // File doesn't exist, return empty structure
+            return { users: {} };
+        }
+        console.error('Error loading events:', error);
         return { users: {} };
     }
 }
 
 async function saveEvents(events) {
-    await fs.writeFile(eventsFile, JSON.stringify(events, null, 2));
+    try {
+        await ensureDataDirExists();
+        await fs.writeFile(eventsFile, JSON.stringify(events, null, 2));
+    } catch (error) {
+        console.error('Error saving events:', error);
+    }
 }
 
 async function createEvent(userId, { name, description, dateTime, category, reminderMinutes }) {

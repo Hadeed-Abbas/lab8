@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "testScripts.js",
   "scripts": {
-    "test": "node testScripts.js"
+    "test": "node testScript.js"
   },
   "keywords": [],
   "author": "",

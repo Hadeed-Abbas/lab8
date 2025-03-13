@@ -1,12 +1,15 @@
 {
   "name": "event-planner",
   "version": "1.0.0",
-  "main": "testScript.js",
+  "main": "testScripts.js",
   "scripts": {
-    "test": "testScript.js"
+    "test": "node testScripts.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "node-cron": "^3.0.3"
+  }
 }

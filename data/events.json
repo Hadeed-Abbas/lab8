@@ -1,0 +1,44 @@
+{
+    "users": {
+      "user1": [
+        {
+          "id": "1678879200000",
+          "name": "Team Meeting",
+          "description": "Weekly team sync",
+          "dateTime": "2025-03-15T10:00:00.000Z",
+          "category": "Meetings",
+          "reminderMinutes": 15,
+          "reminded": false
+        },
+        {
+          "id": "1678879200001",
+          "name": "Doctor Appointment",
+          "description": "Annual checkup",
+          "dateTime": "2025-03-20T14:30:00.000Z",
+          "category": "Appointments",
+          "reminderMinutes": 60,
+          "reminded": false
+        }
+      ],
+      "user2": [
+        {
+          "id": "1678879200002",
+          "name": "Birthday Party",
+          "description": "John's 30th birthday",
+          "dateTime": "2025-03-18T18:00:00.000Z",
+          "category": "Birthdays",
+          "reminderMinutes": 1440,
+          "reminded": false
+        },
+        {
+          "id": "1678879200003",
+          "name": "Dentist",
+          "description": "Teeth cleaning",
+          "dateTime": "2025-03-25T09:00:00.000Z",
+          "category": "Appointments",
+          "reminderMinutes": 30,
+          "reminded": false
+        }
+      ]
+    }
+  }

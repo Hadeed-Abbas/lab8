@@ -5,7 +5,17 @@ const cron = require('node-cron');
 const dataDir = path.join(__dirname, '..', 'data');
 const eventsFile = path.join(dataDir, 'events.json');
 
-cron.schedule('* * * * *', () => checkReminders());
+// Only schedule cron job if not in CI environment
+if (!process.env.CI) {
+    try {
+        cron.schedule('* * * * *', () => checkReminders());
+        console.log('Cron job scheduled successfully');
+    } catch (error) {
+        console.error('Failed to schedule cron job:', error);
+    }
+} else {
+    console.log('Running in CI environment, skipping cron job scheduling');
+}
 
 async function ensureDataDirExists() {
     try {
